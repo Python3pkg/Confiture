@@ -42,7 +42,7 @@ class BasePlugin(object):
         self.config = config
 
     def print_config(self):
-        print '%s: ' % self.__class__.__name__
+        print('%s: ' % self.__class__.__name__)
         pprint(self.config.to_dict())
 
 
@@ -105,11 +105,11 @@ if __name__ == '__main__':
         pconfig = config.parse()
     except (ValidationError, ParsingError) as err:
         if err.position is not None:
-            print str(err.position)
-        print err
+            print(str(err.position))
+        print(err)
         sys.exit(1)
     else:
-        print 'Main configuration:'
+        print('Main configuration:')
         pprint(pconfig.to_dict())
 
     # Enable each used plugins:
@@ -119,16 +119,16 @@ if __name__ == '__main__':
             if plugin.name == plugin_conf.args:
                 break
         else:
-            print 'Unknown plugin %r, exiting.' % plugin_conf.args
+            print('Unknown plugin %r, exiting.' % plugin_conf.args)
             sys.exit(1)
         # Check plugin configuration:
         try:
             validated_conf = plugin.schema.validate(plugin_conf)
         except ValidationError as err:
-            print 'Bad plugin configuration:'
+            print('Bad plugin configuration:')
             if err.position is not None:
-                print str(err.position)
-            print err
+                print(str(err.position))
+            print(err)
             sys.exit(1)
         else:
             # Instanciate the plugin object:
@@ -136,6 +136,6 @@ if __name__ == '__main__':
 
     # Print each enabled plugin config:
     for plugin in enabled_plugins:
-        print '\n' + '~' * 80 + '\n'
+        print('\n' + '~' * 80 + '\n')
         plugin.print_config()
 

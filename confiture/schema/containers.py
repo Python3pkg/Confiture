@@ -8,7 +8,7 @@ except ImportError:
     argparse = None
 
 if sys.version_info[0] < 3:
-    from itertools import izip as zip
+    
 
 from confiture.tree import ConfigSection, ConfigValue
 from confiture.schema import Container, ArgparseContainer, ValidationError
@@ -281,7 +281,7 @@ class TypedArray(ArgparseContainer):
                 raise ValidationError('bad array size (should be %d, found %d '
                                       'items)' % (len(self._types), len(values)))
 
-            for i, (item, item_type) in enumerate(zip(values, self._types)):
+            for i, (item, item_type) in enumerate(list(zip(values, self._types))):
                 try:
                     item = item_type.validate(item)
                 except ValidationError as err:
@@ -314,7 +314,7 @@ class Section(Container):
             if hasattr(cls, '_meta'):
                 self.meta.update(cls._meta)
             # Update fields from class:
-            for key, value in cls.__dict__.items():
+            for key, value in list(cls.__dict__.items()):
                 if isinstance(value, Container):
                     self.keys[key] = value
 
@@ -334,7 +334,7 @@ class Section(Container):
         """ Populate an argparse parser.
         """
 
-        for name, container in self.keys.items():
+        for name, container in list(self.keys.items()):
             container.populate_argparse(parser, name=name)
 
     def validate(self, section):
@@ -358,7 +358,7 @@ class Section(Container):
             else:
                 validated_section.args = validated_args
         # Validate the section's children:
-        for name, container in self.keys.items():
+        for name, container in list(self.keys.items()):
             if isinstance(container, Section):
                 # Validate subsections of this section:
                 subsections = list(section.subsections(name))

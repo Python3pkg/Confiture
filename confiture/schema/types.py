@@ -10,7 +10,7 @@ import os.path
 if sys.version_info[0] >= 3:
     import urllib.parse as urlparse
 else:
-    import urlparse
+    import urllib.parse
 
 try:
     import ipaddr
@@ -267,7 +267,7 @@ class Url(String):
 
     def validate(self, value):
         try:
-            return urlparse.urlparse(value)
+            return urllib.parse.urlparse(value)
         except ValueError as err:
             raise ValidationError(str(err))
 

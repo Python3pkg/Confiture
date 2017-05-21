@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Confiture'
-copyright = u'2012, Antoine Millet'
+project = 'Confiture'
+copyright = '2012, Antoine Millet'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -93,7 +93,7 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 import sphinx_naps_theme
 html_theme_path = [sphinx_naps_theme.template_path]
-print sphinx_naps_theme.template_path
+print(sphinx_naps_theme.template_path)
 html_theme = 'naps'
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -181,8 +181,8 @@ htmlhelp_basename = 'Confituredoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Confiture.tex', u'Confiture Documentation',
-   u'Antoine Millet', 'manual'),
+  ('index', 'Confiture.tex', 'Confiture Documentation',
+   'Antoine Millet', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -214,6 +214,6 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'confiture', u'Confiture Documentation',
-     [u'Antoine Millet'], 1)
+    ('index', 'confiture', 'Confiture Documentation',
+     ['Antoine Millet'], 1)
 ]

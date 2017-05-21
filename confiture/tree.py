@@ -109,7 +109,7 @@ class ConfigSection(object):
         """ Iterate over all children of this section.
         """
 
-        return chain(iter(self._values.values()), iter(self._subsections.values()))
+        return chain(iter(list(self._values.values())), iter(list(self._subsections.values())))
 
     def iterflatchildren(self):
         """ Iterate over all children of this section, not grouping sections.
@@ -118,7 +118,7 @@ class ConfigSection(object):
 
             This is used for the include feature of parser.
         """
-        return chain(iter(self._values.values()), *iter(self._subsections.values()))
+        return chain(iter(list(self._values.values())), *iter(list(self._subsections.values())))
 
     def iteritems(self, expand_sections=False):
         """ Like :meth:``iterchildren`` but return a couple (key, child).
@@ -129,11 +129,11 @@ class ConfigSection(object):
         """
 
         if expand_sections:
-            return chain(iter(self._values.items()),
+            return chain(iter(list(self._values.items())),
                          # Expand {'x': [1, 2]}.items() into ((x, 1), (x, 2)):
-                         ((k, v) for k, l in self._subsections.items() for v in l))
+                         ((k, v) for k, l in list(self._subsections.items()) for v in l))
         else:
-            return chain(iter(self._values.items()), iter(self._subsections.items()))
+            return chain(iter(list(self._values.items())), iter(list(self._subsections.items())))
 
     #
     # Public API -- User methods
@@ -211,10 +211,10 @@ class ConfigSection(object):
         """ Represent the section (and subsections) as a dict.
         """
         output = {}
-        for name, subsections in self._subsections.items():
+        for name, subsections in list(self._subsections.items()):
             output[name] = []
             for subsection in subsections:
                 output[name].append(subsection.to_dict())
-        for name, value in self._values.items():
+        for name, value in list(self._values.items()):
             output[name] = value.value
         return output
