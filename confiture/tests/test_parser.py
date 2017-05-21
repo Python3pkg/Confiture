@@ -28,7 +28,7 @@ def test_lexer():
 def check_token(test, expected_type, expected_value):
     lexer = ConfitureLexer()
     lexer.input(test)
-    token = next(lexer)
+    token = lexer.next()
     assert token.type == expected_type
     assert token.value == expected_value
 
